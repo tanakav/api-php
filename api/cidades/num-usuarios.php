@@ -14,7 +14,7 @@ $db = $database->getConnection();
 
 $cidade = new Cidade($db);
 
-$stmt = $cidade->findAll();
+$stmt = $cidade->usuariosPorCidade();
 $num = $stmt->rowCount();
 
 if($num>0){
@@ -25,8 +25,7 @@ if($num>0){
         $registro_cidade = array(
             "id"            => $id,
             "nome"          => $nome,
-            "created_at"    => $created_at,
-            "updated_at"    => $updated_at
+            "usuarios"      => $usuarios
         );
         array_push($cidades,$registro_cidade);
     }

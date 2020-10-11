@@ -29,7 +29,7 @@ class Usuario{
 
     public function findById(){
         $query = "SELECT *
-                FROM ".$this->table." as usuario
+                FROM ".$this->table." usuario
                 WHERE usuario.id = :id
         ";
 

@@ -17,7 +17,7 @@ $nome="";
 $usuario->id = isset($_GET['id'])? $_GET['id'] : "";
 $registro_usuario = $usuario->findById();
 
-if($registro_usuario["nome"] != null){
+if($registro_usuario){
     extract($registro_usuario);
 
     $usuario = array(

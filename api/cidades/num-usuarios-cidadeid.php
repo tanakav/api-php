@@ -11,32 +11,26 @@ include_once '../../models/cidade.php';
 
 $database = new Database();
 $db = $database->getConnection();
-
 $cidade = new Cidade($db);
 
-$stmt = $cidade->findAll();
-$num = $stmt->rowCount();
+$cidade->id = isset($_GET['id'])? $_GET['id'] : "";
+$registro_cidade = $cidade->usuariosPorCidadeId();
 
-if($num>0){
+if($registro_cidade){
+    extract($registro_cidade);
 
-    $cidades = array();
-    while($row = $stmt->fetch(PDO::FETCH_ASSOC)){
-        extract($row);
-        $registro_cidade = array(
-            "id"            => $id,
-            "nome"          => $nome,
-            "created_at"    => $created_at,
-            "updated_at"    => $updated_at
-        );
-        array_push($cidades,$registro_cidade);
-    }
+    $cidade = array(
+        "id"            => $id,
+        "nome"          => $nome,
+        "usuarios"      => $usuarios
+    );
 
     http_response_code(200);
-    echo json_encode($cidades);
+    echo json_encode($cidade);
 
 }else{
     http_response_code(404);
     echo json_encode(
-        array("message"=>"Nenhuma cidade encontrada")
+        array("message"=>"Nenhum usuario na cidade")
     );
 }
