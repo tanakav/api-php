@@ -15,7 +15,7 @@ $db = $database->getConnection();
 $usuario = new Usuario($db);
 $data = json_decode(file_get_contents("php://input"));
 
-if($usuario->id = $data->id){
+if(($usuario->id = $data->id) != null && $usuario->findById() != null){
     if($usuario->delete()){
         http_response_code(200);
         echo json_encode(array("message"=>"Usuario deletado com sucesso"));
@@ -24,4 +24,7 @@ if($usuario->id = $data->id){
         echo json_encode(array("message"=>"Nao foi possivel deletar usuario"));
     }
 
+}else{
+    http_response_code(404);
+    echo json_encode(array("message"=>"Usuario nao encontrado"));
 }

@@ -14,9 +14,7 @@ $db = $database->getConnection();
 $usuario = new Usuario($db);
 $data = json_decode(file_get_contents("php://input"));
 
-if($usuario->id = $data->id ){
-
-    $usuario_original = $usuario->findById();
+if(($usuario->id = $data->id) != null && ($usuario_original = $usuario->findById()) !=null){
 
     $usuario->nome = isset($data->nome) ?  $data->nome : $usuario_original["nome"];
     $usuario->endereco_id = isset($data->endereco_id) ?  $data->endereco_id : $usuario_original["endereco_id"];
@@ -33,4 +31,7 @@ if($usuario->id = $data->id ){
         http_response_code(503);
         echo json_encode(array("message" => "Nao foi possivel atualizar o usuario"));
     }
+}else{
+    http_response_code(404);
+    echo json_encode(array("message" => "Usuario nao encontrado"));
 }
