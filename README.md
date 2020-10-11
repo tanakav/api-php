@@ -46,11 +46,11 @@ Como não alterei no RouteServiceProvider, por padrão, todos os endpoints do La
 
 - Atualizar usuário
     
-    `PATCH /api/usuarios/update.php`
+    `POST /api/usuarios/update.php`
 
 - Deletar usuário
 
-    `DELETE /api/usuarios/delete.php`
+    `POST /api/usuarios/delete.php`
 
 ### Endereços
 - Obter endereços
